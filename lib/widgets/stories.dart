@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_responsive_ui/config/palette.dart';
 import 'package:flutter_facebook_responsive_ui/models/models.dart';
+import 'package:flutter_facebook_responsive_ui/widgets/profile_avatar.dart';
 
 class Stories extends StatelessWidget {
   final User currentUser;
@@ -15,7 +17,7 @@ class Stories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      color: Colors.purple,
+      color: Colors.white,
       child: ListView.builder(
           padding: EdgeInsets.symmetric(
             vertical: 10,
@@ -55,11 +57,59 @@ class _StoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CachedNetworkImage(
-          imageUrl: isAddStory ? currentUser.imageUrl : story.imageUrl,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: CachedNetworkImage(
+            imageUrl: isAddStory ? currentUser.imageUrl : story.imageUrl,
+            height: double.infinity,
+            width: 110.0,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Container(
           height: double.infinity,
           width: 110.0,
-          fit: BoxFit.cover,
+          decoration: BoxDecoration(
+            gradient: Palette.storyGradient,
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        Positioned(
+          top: 8.0,
+          left: 8.0,
+          child: isAddStory
+              ? Container(
+                  height: 40.0,
+                  width: 40.0,
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: const Icon(Icons.add),
+                    iconSize: 30.0,
+                    color: Palette.facebookBlue,
+                    onPressed: () => print("Add to story"),
+                  ))
+              : ProfileAvatar(
+                  imageUrl: story.user.imageUrl,
+                  hasBorder: !story.isViewed,
+                ),
+        ),
+        Positioned(
+          bottom: 8.0,
+          left: 8.0,
+          right: 8.0,
+          child: Text(
+            isAddStory ? "Add to story" : story.user.name,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
         )
       ],
     );
