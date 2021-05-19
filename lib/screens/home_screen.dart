@@ -4,6 +4,8 @@ import 'package:flutter_facebook_responsive_ui/data/data.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/ceate_post_container.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/circle_button.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/rooms.dart';
+
+import 'package:flutter_facebook_responsive_ui/widgets/stories.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -32,21 +34,29 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {},
               ),
               CircleButton(
-                icon: MdiIcons.facebookMessenger,
-                iconSize: 30,
-                onPressed: () {},
-              )
+                  icon: MdiIcons.facebookMessenger,
+                  iconSize: 30,
+                  onPressed: () {})
             ],
           ),
           //profile section
           SliverToBoxAdapter(
             child: CreatePostContainer(currentUser: currentUser),
           ),
-
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
             sliver: SliverToBoxAdapter(
               child: Rooms(onlineUsers: onlineUsers),
+            ),
+          ),
+
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+            sliver: SliverToBoxAdapter(
+              child: Stories(
+                currentUser: currentUser,
+                stories: stories,
+              ),
             ),
           )
         ],
