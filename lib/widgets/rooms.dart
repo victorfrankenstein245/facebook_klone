@@ -42,6 +42,7 @@ class Rooms extends StatelessWidget {
 class _CreateRoomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return OutlineButton(
       onPressed: () => print("Create Room"),
       shape: RoundedRectangleBorder(

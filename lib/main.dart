@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_responsive_ui/config/palette.dart';
+import 'package:flutter_facebook_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_facebook_responsive_ui/screens/screens.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Palette.scaffold,
       ),
-      home: HomeScreen(),
+      home: NavScreen(),
     );
   }
 }
